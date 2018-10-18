@@ -2,95 +2,102 @@
 <project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xmlns="http://maven.apache.org/POM/4.0.0"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-    <modelVersion>4.0.0</modelVersion>
+  <modelVersion>4.0.0</modelVersion>
 
-    <groupId>io.fusionauth</groupId>
-    <artifactId>fusionauth-spring-security-example</artifactId>
-    <version>1.0-SNAPSHOT</version>
-    <packaging>jar</packaging>
+  <groupId>io.fusionauth</groupId>
+  <artifactId>fusionauth-spring-security-example</artifactId>
+  <version>1.0-SNAPSHOT</version>
+  <packaging>jar</packaging>
 
-    <name>FusionAuth Spring Security Example</name>
-    <description>An example of using Spring Security in FusionAuth using OpenID Connect</description>
-    <url>https://github.com/FusionAuth/fusionauth-spring-security-example</url>
+  <name>FusionAuth Spring Security Example</name>
+  <description>An example of using Spring Security in FusionAuth using OpenID Connect</description>
+  <url>https://github.com/FusionAuth/fusionauth-spring-security-example</url>
 
-    <developers>
-        <developer>
-            <name>Tyler Scott</name>
-            <email>tyler@fusionauth.io</email>
-            <organization>FusionAuth</organization>
-            <organizationUrl>https://fusionauth.io</organizationUrl>
-        </developer>
-    </developers>
+  <developers>
+    <developer>
+      <name>Tyler Scott</name>
+      <email>tyler@fusionauth.io</email>
+      <organization>FusionAuth</organization>
+      <organizationUrl>https://fusionauth.io</organizationUrl>
+    </developer>
+  </developers>
 
-    <licenses>
-        <license>
-            <name>MIT License</name>
-            <url>http://www.opensource.org/licenses/mit-license.php</url>
-        </license>
-    </licenses>
+  <licenses>
+    <license>
+      <name>MIT License</name>
+      <url>http://www.opensource.org/licenses/mit-license.php</url>
+    </license>
+  </licenses>
 
-    <scm>
-        <connection>scm:git:ssh://github.com:fusionauth/fusionauth-spring-security-example</connection>
-        <url>https://github.com/fusionauth/fusionauth-spring-security-example</url>
-    </scm>
+  <scm>
+    <connection>scm:git:ssh://github.com:fusionauth/fusionauth-spring-security-example</connection>
+    <url>https://github.com/fusionauth/fusionauth-spring-security-example</url>
+  </scm>
 
-    <properties>
-        <maven.compiler.source>1.8</maven.compiler.source>
-        <maven.compiler.target>1.8</maven.compiler.target>
-    </properties>
+  <properties>
+    <maven.compiler.source>1.8</maven.compiler.source>
+    <maven.compiler.target>1.8</maven.compiler.target>
+  </properties>
 
-    <parent>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.0.5.RELEASE</version>
-    </parent>
+  <parent>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-parent</artifactId>
+    <version>2.0.5.RELEASE</version>
+  </parent>
 
-    <dependencies>
-        <dependency>
-            <groupId>io.fusionauth</groupId>
-            <artifactId>fusionauth-spring-security</artifactId>
-            <version>1.0.0</version>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-security</artifactId>
-            <version>2.0.5.RELEASE</version>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-web</artifactId>
-            <version>2.0.5.RELEASE</version>
-        </dependency>
+  <dependencies>
+    <dependency>
+      <groupId>io.fusionauth</groupId>
+      <artifactId>fusionauth-spring-security</artifactId>
+      <version>1.0.0</version>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-security</artifactId>
+      <version>2.0.5.RELEASE</version>
+    </dependency>
 
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-tomcat</artifactId>
-            <version>2.0.5.RELEASE</version>
-        </dependency>
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-web</artifactId>
+      <version>2.0.5.RELEASE</version>
+    </dependency>
 
-        <dependency>
-            <groupId>org.springframework.security.oauth</groupId>
-            <artifactId>spring-security-oauth2</artifactId>
-            <version>2.3.3.RELEASE</version>
-        </dependency>
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-tomcat</artifactId>
+      <version>2.0.5.RELEASE</version>
+    </dependency>
 
-        <dependency>
-            <groupId>org.springframework.security</groupId>
-            <artifactId>spring-security-jwt</artifactId>
-            <version>1.0.9.RELEASE</version>
-        </dependency>
-    </dependencies>
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-freemarker</artifactId>
+      <version>2.0.5.RELEASE</version>
+    </dependency>
 
-    <build>
-        <pluginManagement>
-            <plugins>
-                <plugin>
-                    <groupId>org.springframework.boot</groupId>
-                    <artifactId>spring-boot-maven-plugin</artifactId>
-                    <version>2.0.5.RELEASE</version>
-                </plugin>
-            </plugins>
-        </pluginManagement>
-    </build>
+    <dependency>
+      <groupId>org.springframework.security.oauth</groupId>
+      <artifactId>spring-security-oauth2</artifactId>
+      <version>2.3.3.RELEASE</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.springframework.security</groupId>
+      <artifactId>spring-security-jwt</artifactId>
+      <version>1.0.9.RELEASE</version>
+    </dependency>
+  </dependencies>
+
+  <build>
+    <pluginManagement>
+      <plugins>
+        <plugin>
+          <groupId>org.springframework.boot</groupId>
+          <artifactId>spring-boot-maven-plugin</artifactId>
+          <version>2.0.5.RELEASE</version>
+        </plugin>
+      </plugins>
+    </pluginManagement>
+  </build>
 
 </project>

@@ -10,6 +10,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.oauth2.client.OAuth2RestTemplate;
 import org.springframework.security.oauth2.client.filter.OAuth2ClientContextFilter;
+import org.springframework.security.oauth2.provider.error.OAuth2AccessDeniedHandler;
 import org.springframework.security.web.authentication.LoginUrlAuthenticationEntryPoint;
 import org.springframework.security.web.authentication.preauth.AbstractPreAuthenticatedProcessingFilter;
 
@@ -41,6 +42,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         .httpBasic().authenticationEntryPoint(new LoginUrlAuthenticationEntryPoint("/login"))
         .and()
         .authorizeRequests()
-        .anyRequest().authenticated();
+        .antMatchers("/").permitAll()
+        .antMatchers("/profile").access("hasRole('user') or hasRole('admin')")
+        .antMatchers("/admin").access("hasRole('admin')")
+        .anyRequest().authenticated()
+        .and()
+        .exceptionHandling()
+        .accessDeniedHandler(new OAuth2AccessDeniedHandler())
+        .accessDeniedPage("/opps");
   }
 }
