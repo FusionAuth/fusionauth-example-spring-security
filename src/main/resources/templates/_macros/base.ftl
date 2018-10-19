@@ -9,11 +9,20 @@
   </head>
   <body>
     <header>
-      [#if user??]
-        Hello, ${user.username}
-      [#else]
-        You aren't logged in. <a href="/login">Login</a>
-      [/#if]
+      <div>
+        <nav>
+          <a href="/">Home</a>
+          <a href="/profile">Profile</a>
+          <a href="/admin">Admin</a>
+        </nav>
+      </div>
+      <div>
+        [#if user??]
+          Hello, ${user.username}
+        [#else]
+          You aren't logged in. <a href="/login">Login</a>
+        [/#if]
+      </div>
     </header>
     [#nested]
   </body>
