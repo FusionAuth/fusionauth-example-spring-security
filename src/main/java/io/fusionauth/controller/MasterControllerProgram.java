@@ -10,16 +10,19 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class MasterControllerProgram {
   @RequestMapping("/admin")
+  @PreAuthorize("hasAuthority('admin')")
   public String admin() {
     return "admin";
   }
 
   @RequestMapping("/")
+  @PreAuthorize("permitAll()")
   public String home() {
     return "hello";
   }
 
   @RequestMapping("/profile")
+  @PreAuthorize("hasAuthority('user') or hasAuthority('admin')")
   public String profile() {
     return "profile";
   }

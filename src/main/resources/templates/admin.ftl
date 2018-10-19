@@ -1,5 +1,5 @@
 [#ftl/]
 [#include "_macros/base.ftl"/]
 [@base]
-  TODO ADMIN
+  Only admins can see this
 [/@base]

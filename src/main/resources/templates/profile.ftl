@@ -4,6 +4,10 @@
 [@base title="profile"]
   <h1>Profile</h1>
 
+  <p>
+    Only logged in users can see this.
+  </p>
+
   Roles:
   <ul>
     [#list user.authorities as authority]
