@@ -18,9 +18,13 @@
       </div>
       <div>
         [#if user??]
-          Hello, ${user.username}
+          [#if user.authorities?has_content]
+            Hello, ${user.username}
+          [#else]
+            You aren't registered for this site. <a href="/register">Register</a>
+          [/#if]
         [#else]
-          You aren't logged in. <a href="/login">Login</a>
+          You aren't logged in. <a href="/login">Login</a> <a href="/register">Sign Up</a>
         [/#if]
       </div>
     </header>

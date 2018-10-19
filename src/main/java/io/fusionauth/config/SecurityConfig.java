@@ -40,6 +40,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
   protected void configure(HttpSecurity http) throws Exception {
     http.addFilterAfter(new OAuth2ClientContextFilter(), AbstractPreAuthenticatedProcessingFilter.class)
         .addFilterAfter(myFilter(), OAuth2ClientContextFilter.class)
-        .httpBasic().authenticationEntryPoint(new LoginUrlAuthenticationEntryPoint("/login"));
+        .httpBasic().authenticationEntryPoint(new LoginUrlAuthenticationEntryPoint("/login"))
+        .and()
+        .authorizeRequests()
+        .antMatchers("/error").permitAll();
   }
 }
