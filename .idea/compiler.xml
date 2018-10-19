@@ -9,5 +9,8 @@
         <module name="fusionauth-spring-security-example" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="fusionauth-spring-security-example" target="1.8" />
+    </bytecodeTargetLevel>
   </component>
 </project>
