@@ -1,5 +1,10 @@
 [#ftl/]
-[#include "_macros/base.ftl"/]
-[@base title="error"]
-  Something went wrong: ${status} ${error}
-[/@base]
+
+<div>
+  <nav>
+    <a href="/">Home</a>
+  </nav>
+</div>
+
+Something went wrong: ${status} ${error}
+

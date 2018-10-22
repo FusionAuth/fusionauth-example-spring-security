@@ -62,7 +62,8 @@ public class RegisterController {
 
       User newUser = new User()
           .with(user -> user.username = body.getFirst("username"))
-          .with(user -> user.password = body.getFirst("password"));
+          .with(user -> user.password = body.getFirst("password"))
+          .with(user -> user.email = body.getFirst("email"));
 
       response = fusionAuthClient.register(null, new RegistrationRequest(newUser, registration));
     }
