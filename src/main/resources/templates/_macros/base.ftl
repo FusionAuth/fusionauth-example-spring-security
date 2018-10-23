@@ -8,31 +8,46 @@
 <html>
   <head>
     <title>${title}</title>
-    <link rel="stylesheet" href="css/style.css" type="text/css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" type="text/css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/style.css" type="text/css">
   </head>
-  <body class="p-3">
-    <header>
-      <div>
-        <nav>
-          <a href="/">Home</a>
-          <a href="/profile">Profile</a>
-          <a href="/admin">Admin</a>
-        </nav>
+  <body class="container-fluid p-0">
+    <nav class="navbar navbar-dark navbar-expand-lg bg-dark">
+      <div class="navbar-brand">
+        <a href="/"><i class="fas fa-leaf"></i></a>
       </div>
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item">
+          <a href="/" class="nav-link">Home</a>
+        </li>
+        <li class="nav-item">
+          <a href="/profile" class="nav-link">Profile</a>
+        </li>
+        <li class="nav-item">
+          <a href="/admin" class="nav-link">Admin</a>
+        </li>
+      </ul>
       <div>
-        [#if loggedIn]
+        [#if loggedIn?? && loggedIn]
           [#if hasRoles]
-            Hello[#if user.username?has_content], ${user.username}[/#if]. <a href="${logoutUri}">Logout</a>
+            <span class="navbar-text">Hello[#if user.username?has_content], ${user.username}[/#if]</span> <a href="${logoutUri}">Logout</a>
           [#else]
-            You aren't registered for this site[#if user.username?has_content] (${user.username})[/#if]. <a href="/register">Register</a>
+            <span class="navbar-text">You aren't registered for this site[#if user.username?has_content] (${user.username})[/#if]</span> <a href="/register">Register</a>
           [/#if]
         [#else]
-          You aren't logged in. <a href="/login">Login</a> <a href="/register">Sign Up</a>
+          <span class="navbar-text">You aren't logged in</span> <a href="/login" class="btn">Login</a> <a href="/register">Sign Up</a>
         [/#if]
       </div>
-    </header>
+    </nav>
     [#nested]
   </body>
 </html>
+[/#macro]
+
+[#macro textControl name displayName type="text"]
+  <div class="form-group">
+    <label for="${name}">${displayName}</label>
+    <input type="${type}" id="${name}" class="form-control" name="${name}">
+  </div>
 [/#macro]

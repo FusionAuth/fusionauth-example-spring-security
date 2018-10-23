@@ -1,5 +1,9 @@
 [#ftl/]
 [#include "_macros/base.ftl"/]
 [@base]
-  Only admins can see this
+  <div class="jumbotron">
+    <h1>Admin</h1>
+
+    <p>Only admins can see this</p>
+  </div>
 [/@base]

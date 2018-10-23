@@ -2,16 +2,16 @@
 [#-- @ftlvariable name="user" type="io.fusionauth.security.FusionAuthUserDetails" --]
 [#include "_macros/base.ftl"]
 [@base title="profile"]
-  <h1>Profile</h1>
+  <div class="jumbotron">
+    <h1>Profile</h1>
 
-  <p>
-    Only logged in users can see this.
-  </p>
+    <p>Only logged in users can see this.</p>
 
-  Roles:
-  <ul>
+    Roles:
+    <ul>
     [#list user.authorities as authority]
       <li>${authority}</li>
     [/#list]
-  </ul>
+    </ul>
+  </div>
 [/@base]
