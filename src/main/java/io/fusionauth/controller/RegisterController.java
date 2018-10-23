@@ -80,11 +80,11 @@ public class RegisterController {
   }
 
   private void validateInput(String email, String password, String confirmPassword) {
-    if (email == null || email.length() == 0) {
+    if (email.length() == 0) {
       throw new RegistrationException("Email is required.");
     }
 
-    if (password == null || confirmPassword == null) {
+    if (password.length() == 0 || confirmPassword.length() == 0) {
       throw new RegistrationException("Password is required.");
     }
 
