@@ -33,18 +33,17 @@ public class RegisterController {
   @Autowired
   private FusionAuthClient fusionAuthClient;
 
-  @RequestMapping(value = "/register", method = RequestMethod.GET)
-  @PreAuthorize("permitAll()")
-  public String registerGet() {
-    return "register";
-  }
-
   @RequestMapping(value = "/register", method = RequestMethod.POST,
       consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
   @PreAuthorize("permitAll()")
-  public View registerPost(@RequestBody MultiValueMap<String, String> body) {
-    Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+  public View handleRegister(@RequestBody MultiValueMap<String, String> body) {
 
+    String email = body.getFirst("email");
+    String password = body.getFirst("password");
+    String confirmPassword = body.getFirst("confirmPassword");
+    validateInput(email, password, confirmPassword);
+
+    Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
     ClientResponse response;
 
     if (authentication.isAuthenticated() && authentication.getPrincipal() instanceof FusionAuthUserDetails) { // User is logged in
@@ -61,9 +60,8 @@ public class RegisterController {
           .with(reg -> reg.roles.add("user"));
 
       User newUser = new User()
-          .with(user -> user.username = body.getFirst("username"))
-          .with(user -> user.password = body.getFirst("password"))
-          .with(user -> user.email = body.getFirst("email"));
+          .with(user -> user.email = body.getFirst("email"))
+          .with(user -> user.password = body.getFirst("password"));
 
       response = fusionAuthClient.register(null, new RegistrationRequest(newUser, registration));
     }
@@ -72,6 +70,26 @@ public class RegisterController {
       return new RedirectView("/");
     } else {
       throw new RegistrationException(response.errorResponse.toString());
+    }
+  }
+
+  @RequestMapping(value = "/register", method = RequestMethod.GET)
+  @PreAuthorize("permitAll()")
+  public String viewRegister() {
+    return "register";
+  }
+
+  private void validateInput(String email, String password, String confirmPassword) {
+    if (email == null || email.length() == 0) {
+      throw new RegistrationException("Email is required.");
+    }
+
+    if (password == null || confirmPassword == null) {
+      throw new RegistrationException("Password is required.");
+    }
+
+    if (!password.equals(confirmPassword)) {
+      throw new RegistrationException("Passwords do not match.");
     }
   }
 

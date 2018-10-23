@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.view.RedirectView;
 
 /**
@@ -14,28 +15,28 @@ import org.springframework.web.servlet.view.RedirectView;
  */
 @Controller
 public class MasterControllerProgram {
-  @RequestMapping("/admin")
-  @PreAuthorize("hasAuthority('admin')")
-  public String admin() {
-    return "admin";
-  }
-
-  @RequestMapping("/")
+  @RequestMapping(value = "/logout", method = RequestMethod.GET)
   @PreAuthorize("permitAll()")
-  public String home() {
-    return "hello";
-  }
-
-  @RequestMapping("/logout")
-  @PreAuthorize("permitAll()")
-  public RedirectView logout(@Autowired HttpServletRequest request) throws ServletException {
+  public RedirectView handleLogout(@Autowired HttpServletRequest request) throws ServletException {
     request.logout();
     return new RedirectView("/");
   }
 
-  @RequestMapping("/profile")
+  @RequestMapping(value = "/admin", method = RequestMethod.GET)
+  @PreAuthorize("hasAuthority('admin')")
+  public String viewAdmin() {
+    return "admin";
+  }
+
+  @RequestMapping(value = "/", method = RequestMethod.GET)
+  @PreAuthorize("permitAll()")
+  public String viewHome() {
+    return "hello";
+  }
+
+  @RequestMapping(value = "/profile", method = RequestMethod.GET)
   @PreAuthorize("hasAuthority('user') or hasAuthority('admin')")
-  public String profile() {
+  public String viewProfile() {
     return "profile";
   }
 }

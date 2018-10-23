@@ -9,8 +9,9 @@
   <head>
     <title>${title}</title>
     <link rel="stylesheet" href="css/style.css" type="text/css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" type="text/css">
   </head>
-  <body>
+  <body class="p-3">
     <header>
       <div>
         <nav>
