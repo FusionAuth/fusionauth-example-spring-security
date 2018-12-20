@@ -2,6 +2,7 @@ package io.fusionauth.controller;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -18,10 +19,10 @@ import org.springframework.web.servlet.view.RedirectView;
 public class MasterControllerProgram {
   @RequestMapping(value = "/logout", method = RequestMethod.GET)
   @PreAuthorize("permitAll()")
-  public RedirectView handleLogout(@Autowired HttpServletRequest request, @RequestParam String redirect) throws ServletException {
+  public RedirectView handleLogout(@Autowired HttpServletRequest request, @RequestParam Optional<String> redirect) throws ServletException {
     request.logout();
-    if (redirect != null && redirect.length() != 0) {
-      return new RedirectView(redirect);
+    if (redirect.isPresent() && redirect.get().length() != 0) {
+      return new RedirectView(redirect.get());
     }
     return new RedirectView("/");
   }
