@@ -55,7 +55,7 @@
     <dependency>
       <groupId>io.fusionauth</groupId>
       <artifactId>fusionauth-java-client</artifactId>
-      <version>1.0.11</version>
+      <version>1.3.0</version>
     </dependency>
 
     <dependency>

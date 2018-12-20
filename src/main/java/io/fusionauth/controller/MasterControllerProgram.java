@@ -8,6 +8,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.view.RedirectView;
 
 /**
@@ -17,8 +18,11 @@ import org.springframework.web.servlet.view.RedirectView;
 public class MasterControllerProgram {
   @RequestMapping(value = "/logout", method = RequestMethod.GET)
   @PreAuthorize("permitAll()")
-  public RedirectView handleLogout(@Autowired HttpServletRequest request) throws ServletException {
+  public RedirectView handleLogout(@Autowired HttpServletRequest request, @RequestParam String redirect) throws ServletException {
     request.logout();
+    if (redirect != null && redirect.length() != 0) {
+      return new RedirectView(redirect);
+    }
     return new RedirectView("/");
   }
 
