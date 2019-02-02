@@ -45,7 +45,7 @@ public class FusionAuthOpenIdConnectConfig {
     details.setScope(asList("openid", "email"));
     details.setPreEstablishedRedirectUri(redirectUri);
     details.setUseCurrentUri(false);
-    details.setClientAuthenticationScheme(AuthenticationScheme.form);
+    details.setClientAuthenticationScheme(AuthenticationScheme.header);
     return details;
   }
 
