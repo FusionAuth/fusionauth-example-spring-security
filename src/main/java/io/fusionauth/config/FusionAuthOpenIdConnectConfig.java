@@ -1,20 +1,18 @@
 package io.fusionauth.config;
 
-import io.fusionauth.security.OpenIDAuthorizationCodeResourceDetails;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.oauth2.client.OAuth2ClientContext;
-import org.springframework.security.oauth2.client.OAuth2RestTemplate;
-import org.springframework.security.oauth2.common.AuthenticationScheme;
-import org.springframework.security.oauth2.config.annotation.web.configuration.EnableOAuth2Client;
-import static java.util.Arrays.asList;
+import org.springframework.security.oauth2.client.registration.ClientRegistration;
+import org.springframework.security.oauth2.client.registration.ClientRegistrationRepository;
+import org.springframework.security.oauth2.client.registration.InMemoryClientRegistrationRepository;
+import org.springframework.security.oauth2.core.ClientAuthenticationMethod;
+import org.springframework.security.oauth2.core.oidc.IdTokenClaimNames;
 
 /**
  * @author Tyler Scott
  */
 @Configuration
-@EnableOAuth2Client
 public class FusionAuthOpenIdConnectConfig {
   @Value("${fusionAuth.accessTokenUri}")
   private String accessTokenUri;
@@ -24,6 +22,9 @@ public class FusionAuthOpenIdConnectConfig {
 
   @Value("${fusionAuth.clientSecret}")
   private String clientSecret;
+
+  @Value("${fusionAuth.jwksUri}")
+  private String jwksUri;
 
   @Value("${fusionAuth.redirectUri}")
   private String redirectUri;
@@ -35,22 +36,22 @@ public class FusionAuthOpenIdConnectConfig {
   private String userInfoUri;
 
   @Bean
-  public OpenIDAuthorizationCodeResourceDetails fusionAuthOpenId() {
-    OpenIDAuthorizationCodeResourceDetails details = new OpenIDAuthorizationCodeResourceDetails();
-    details.setClientId(clientId);
-    details.setClientSecret(clientSecret);
-    details.setAccessTokenUri(accessTokenUri);
-    details.settUserInfoUri(userInfoUri);
-    details.setUserAuthorizationUri(userAuthorizationUri);
-    details.setScope(asList("openid", "email"));
-    details.setPreEstablishedRedirectUri(redirectUri);
-    details.setUseCurrentUri(false);
-    details.setClientAuthenticationScheme(AuthenticationScheme.header);
-    return details;
+  public ClientRegistrationRepository clientRegistrationRepository() {
+    return new InMemoryClientRegistrationRepository(fusionAuthClientRegistration());
   }
 
-  @Bean
-  public OAuth2RestTemplate fusionAuthOpenIdTemplate(final OAuth2ClientContext clientContext) {
-    return new OAuth2RestTemplate(fusionAuthOpenId(), clientContext);
+  private ClientRegistration fusionAuthClientRegistration() {
+    return ClientRegistration.withRegistrationId("fusionAuth")
+                             .clientId(clientId)
+                             .clientSecret(clientSecret)
+                             .clientAuthenticationMethod(ClientAuthenticationMethod.BASIC)
+                             .redirectUriTemplate(redirectUri)
+                             .scope("openid", "email")
+                             .authorizationUri(userAuthorizationUri)
+                             .tokenUri(accessTokenUri)
+                             .userNameAttributeName(IdTokenClaimNames.SUB)
+                             .jwkSetUri(jwksUri)
+                             .clientName("fusionAuth")
+                             .build();
   }
 }

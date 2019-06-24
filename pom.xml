@@ -38,10 +38,7 @@
     <maven.compiler.source>1.8</maven.compiler.source>
     <maven.compiler.target>1.8</maven.compiler.target>
 
-    <fusionauth-spring-security.version>1.0.4</fusionauth-spring-security.version>
     <fusionauth-java-client.version>1.6.0</fusionauth-java-client.version>
-    <spring-security-oauth2.version>2.3.6.RELEASE</spring-security-oauth2.version>
-    <spring-security-jwt.version>1.0.10.RELEASE</spring-security-jwt.version>
   </properties>
 
   <parent>
@@ -51,11 +48,6 @@
   </parent>
 
   <dependencies>
-    <dependency>
-      <groupId>io.fusionauth</groupId>
-      <artifactId>fusionauth-spring-security</artifactId>
-      <version>${fusionauth-spring-security.version}</version>
-    </dependency>
 
     <dependency>
       <groupId>io.fusionauth</groupId>
@@ -84,15 +76,12 @@
     </dependency>
 
     <dependency>
-      <groupId>org.springframework.security.oauth</groupId>
-      <artifactId>spring-security-oauth2</artifactId>
-      <version>${spring-security-oauth2.version}</version>
+      <groupId>org.springframework.security</groupId>
+      <artifactId>spring-security-oauth2-client</artifactId>
     </dependency>
-
     <dependency>
       <groupId>org.springframework.security</groupId>
-      <artifactId>spring-security-jwt</artifactId>
-      <version>${spring-security-jwt.version}</version>
+      <artifactId>spring-security-oauth2-jose</artifactId>
     </dependency>
   </dependencies>
 
