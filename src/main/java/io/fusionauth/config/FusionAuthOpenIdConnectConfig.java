@@ -6,6 +6,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.security.oauth2.client.registration.ClientRegistration;
 import org.springframework.security.oauth2.client.registration.ClientRegistrationRepository;
 import org.springframework.security.oauth2.client.registration.InMemoryClientRegistrationRepository;
+import org.springframework.security.oauth2.core.AuthorizationGrantType;
 import org.springframework.security.oauth2.core.ClientAuthenticationMethod;
 import org.springframework.security.oauth2.core.oidc.IdTokenClaimNames;
 
@@ -42,16 +43,18 @@ public class FusionAuthOpenIdConnectConfig {
 
   private ClientRegistration fusionAuthClientRegistration() {
     return ClientRegistration.withRegistrationId("fusionAuth")
-                             .clientId(clientId)
-                             .clientSecret(clientSecret)
+                             .authorizationGrantType(AuthorizationGrantType.AUTHORIZATION_CODE)
+                             .authorizationUri(userAuthorizationUri)
                              .clientAuthenticationMethod(ClientAuthenticationMethod.BASIC)
+                             .clientId(clientId)
+                             .clientName("fusionAuth")
+                             .clientSecret(clientSecret)
+                             .jwkSetUri(jwksUri)
                              .redirectUriTemplate(redirectUri)
                              .scope("openid", "email")
-                             .authorizationUri(userAuthorizationUri)
                              .tokenUri(accessTokenUri)
+                             .userInfoUri(userInfoUri)
                              .userNameAttributeName(IdTokenClaimNames.SUB)
-                             .jwkSetUri(jwksUri)
-                             .clientName("fusionAuth")
                              .build();
   }
 }

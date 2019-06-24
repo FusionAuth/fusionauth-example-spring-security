@@ -8,13 +8,10 @@ import io.fusionauth.client.FusionAuthClient;
 import io.fusionauth.domain.User;
 import io.fusionauth.domain.UserRegistration;
 import io.fusionauth.domain.api.user.RegistrationRequest;
-import io.fusionauth.security.FusionAuthUserDetails;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.MediaType;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.oauth2.client.authentication.OAuth2AuthenticationToken;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -28,23 +25,24 @@ import org.springframework.web.servlet.view.RedirectView;
  */
 @Controller
 public class RegisterController {
+  private final FusionAuthClient fusionAuthClient;
+
   @Value("${fusionAuth.applicationId}")
   private String appId;
 
-  @Autowired
-  private FusionAuthClient fusionAuthClient;
+  public RegisterController(FusionAuthClient fusionAuthClient) {
+    this.fusionAuthClient = fusionAuthClient;
+  }
 
   @RequestMapping(value = "/register", method = RequestMethod.POST,
       consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
   @PreAuthorize("permitAll()")
-  public View handleRegister(@RequestBody MultiValueMap<String, String> body) {
-    Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+  public View handleRegister(@RequestBody MultiValueMap<String, String> body, OAuth2AuthenticationToken authentication) {
     ClientResponse response;
 
-    if (authentication.isAuthenticated() && authentication.getPrincipal() instanceof FusionAuthUserDetails) { // User is logged in
-      FusionAuthUserDetails userDetails = (FusionAuthUserDetails) authentication.getPrincipal();
+    if (authentication.isAuthenticated()) { // User is logged in
       UserRegistration registration = new UserRegistration()
-          .with(reg -> reg.userId = UUID.fromString(userDetails.userId))
+          .with(reg -> reg.userId = UUID.fromString(authentication.getName()))
           .with(reg -> reg.applicationId = UUID.fromString(appId))
           .with(reg -> reg.roles.add("user"));
 

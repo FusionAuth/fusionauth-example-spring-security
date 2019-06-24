@@ -19,7 +19,6 @@ public class FusionAuthClientConfig {
 
   @Bean
   public FusionAuthClient setupClient() {
-    FusionAuthClient client = new FusionAuthClient(apiKey, baseUrl);
-    return client;
+    return new FusionAuthClient(apiKey, baseUrl);
   }
 }
