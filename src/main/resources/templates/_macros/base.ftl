@@ -10,7 +10,7 @@
     <title>${title}</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" type="text/css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous">
-    <link rel="stylesheet" href="css/style.css" type="text/css">
+    <link rel="stylesheet" href="/css/style.css" type="text/css">
   </head>
   <body class="container-fluid p-0">
     <nav class="navbar navbar-dark navbar-expand-lg bg-dark">
@@ -36,7 +36,8 @@
             <span class="navbar-text">You aren't registered for this site[#if user.username?has_content] (${user.username})[/#if]</span> <a href="/register">Register</a>
           [/#if]
         [#else]
-          <span class="navbar-text">You aren't logged in</span> <a href="/login" class="btn">Login</a> <a href="/register">Sign Up</a>
+          <span class="navbar-text">You aren't logged in</span> <a href="/oauth2/authorization/fusionAuth" class="btn">Login</a> <a
+            href="/register">Sign Up</a>
         [/#if]
       </div>
     </nav>
