@@ -10,7 +10,6 @@ import io.fusionauth.domain.UserRegistration;
 import io.fusionauth.domain.api.user.RegistrationRequest;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.MediaType;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.oauth2.client.authentication.OAuth2AuthenticationToken;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.MultiValueMap;
@@ -36,7 +35,6 @@ public class RegisterController {
 
   @RequestMapping(value = "/register", method = RequestMethod.POST,
       consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
-  @PreAuthorize("permitAll()")
   public View handleRegister(@RequestBody MultiValueMap<String, String> body, OAuth2AuthenticationToken authentication) {
     ClientResponse response;
 
@@ -74,7 +72,6 @@ public class RegisterController {
   }
 
   @RequestMapping(value = "/register", method = RequestMethod.GET)
-  @PreAuthorize("permitAll()")
   public String viewRegister() {
     return "register";
   }

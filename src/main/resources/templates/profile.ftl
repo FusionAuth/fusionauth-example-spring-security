@@ -1,5 +1,5 @@
 [#ftl/]
-[#-- @ftlvariable name="user" type="io.fusionauth.security.FusionAuthUserDetails" --]
+[#-- @ftlvariable name="user" type="org.springframework.security.oauth2.core.oidc.user.OidcUser" --]
 [#include "_macros/base.ftl"]
 [@base title="profile"]
   <div class="jumbotron">
@@ -7,11 +7,6 @@
 
     <p>Only logged in users can see this.</p>
 
-    Roles:
-    <ul>
-    [#list user.authorities as authority]
-      <li>${authority}</li>
-    [/#list]
-    </ul>
+    Raw user: [${user}]
   </div>
 [/@base]

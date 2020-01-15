@@ -16,7 +16,6 @@ public class MasterControllerProgram {
   }
 
   @GetMapping(value = "/")
-  @PreAuthorize("permitAll()")
   public String viewHome() {
     return "hello";
   }

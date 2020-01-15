@@ -1,0 +1,6 @@
+[#ftl]
+[#-- @implicitly included --]
+[#-- @ftlvariable name="logoutUri" type="java.lang.String" --]
+[#-- @ftlvariable name="hasRoles" type="boolean" --]
+[#-- @ftlvariable name="loggedIn" type="boolean" --]
+[#-- @ftlvariable name="user" type="java.security.Principal" --]
