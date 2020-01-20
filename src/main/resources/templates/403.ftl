@@ -1,10 +1,10 @@
 [#ftl/]
 [#-- @ftlvariable name="user" type="org.springframework.security.oauth2.core.oidc.user.OidcUser" --]
 [#include "_macros/base.ftl"/]
-[@base title="Home"]
+[@base title="Access Denied"]
   <div class="jumbotron">
-    <h1>Home page</h1>
-    <p>Everybody can see this content. It is the landing page of our app.</p>
+    <h1>Access Denied</h1>
+    <p>You do not have permission to access that page.</p>
 
       [#if loggedIn && !hasRoles]
         <div class="alert alert-warning">

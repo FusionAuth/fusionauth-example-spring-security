@@ -1,8 +1,10 @@
 [#ftl]
 
+[#import "/spring.ftl" as spring/]
+
 [#macro base title="Example App"]
-<!doctype html>
-<html>
+  <!doctype html>
+  <html>
   <head>
     <title>${title}</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" type="text/css">
@@ -28,10 +30,9 @@
     </ul>
     <div class="ml-auto">
         [#if loggedIn?? && loggedIn]
-            [#if hasRoles]
-              <span class="navbar-text">Hello[#if user.username?has_content], ${user.username}[/#if]</span>
-              <a class="btn btn-outline-success mx-1" href="${logoutUri}">Logout</a>
-            [#else]
+          <span class="navbar-text">Hello[#if user.username?has_content], ${user.username}[/#if]</span>
+          <a class="btn btn-outline-success mx-1" href="${logoutUri}">Logout</a>
+            [#if !hasRoles]
               <span class="navbar-text">You aren't registered for this site[#if user.username?has_content] (${user.username})[/#if]</span>
               <a class="btn btn-outline-success mx-1" href="/register">Register</a>
             [/#if]
@@ -50,6 +51,19 @@
 [#macro textControl name displayName type="text"]
   <div class="form-group">
     <label for="${name}">${displayName}</label>
-    <input type="${type}" id="${name}" class="form-control" name="${name}">
+      [@spring.formInput path=name attributes=getInputAttributes(name) fieldType=type/]
+      [@spring.showErrors "<br>" "invalid-feedback"/]
   </div>
 [/#macro]
+
+[#function getInputAttributes name]
+    [#local attributes = 'class="form-control'/]
+    [#if bindingResult??]
+        [#if bindingResult.hasFieldErrors(name?keep_after_last("."))]
+            [#local attributes += " is-invalid"/]
+        [#else]
+            [#local attributes += " is-valid"/]
+        [/#if]
+    [/#if]
+    [#return attributes + '"']
+[/#function]

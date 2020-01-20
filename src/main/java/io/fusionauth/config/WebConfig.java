@@ -93,5 +93,4 @@ public class WebConfig implements WebMvcConfigurer {
         //when Anonymous Authentication is enabled
         !(authentication instanceof AnonymousAuthenticationToken);
   }
-
 }

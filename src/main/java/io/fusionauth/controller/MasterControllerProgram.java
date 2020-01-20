@@ -25,4 +25,9 @@ public class MasterControllerProgram {
   public String viewProfile() {
     return "profile";
   }
+
+  @GetMapping("/403")
+  public String getAccessDenied() {
+    return "403";
+  }
 }
