@@ -2,6 +2,12 @@ FusionAuth Spring Security Example
 ====
 A quick and easy example of how to use [OpenId Connect](https://openid.net/connect/) to integrate a spring application with [FusionAuth](https://fusionauth.io).
 
+# DEPRECATED
+
+This repository is no longer maintained. For a modern example of integrating Spring and FusionAuth, please see https://github.com/FusionAuth/fusionauth-example-java-spring
+
+# DEPRECATED
+
 Usage
 ----
 
